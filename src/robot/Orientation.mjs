@@ -1,15 +1,14 @@
+const values = ['N', 'E', 'S', 'W'];
+
 export default class Orientation {
 
-  static East = 'E';
-  static West = 'W';
   static North = 'N';
+  static East = 'E';
   static South = 'S';
-
+  static West = 'W';
+  
   static isValid(v) {
-    return  Orientation.East == v || 
-            Orientation.West == v || 
-            Orientation.North == v ||
-            Orientation.South == v;
+    return values.includes(v);
   }
 
   static assertValid(v) {
@@ -29,6 +28,27 @@ export default class Orientation {
 
   get() {
     return this.value;
+  }
+
+  rotate(v = 0) {
+    if(v === 0) {
+      return this;
+    }
+    const max = values.length;
+    const distance = this.getAsInteger() + v;
+
+    return  (0 <= distance) ? this.setAsInteger(distance%max) :
+            this.setAsInteger(((v%max) + max)%max);
+  }
+
+  getAsInteger() {
+    const values = [Orientation.North, Orientation.East, Orientation.South, Orientation.West];
+    return values.indexOf(this.value);
+  }
+
+  setAsInteger(index = 0) { 
+    this.value = Orientation.assertValid(values[index]);
+    return this;
   }
 
 };

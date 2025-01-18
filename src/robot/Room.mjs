@@ -11,4 +11,18 @@ export default class Room {
     this.height = height;
   }
 
+  /**
+   * Return true if the position is located within the
+   * room, otherwise false.
+   * 
+   * @param {Position} position 
+   * @returns {boolean}
+   */
+  contains(position) {
+    return  0 <= position.x &&
+            0 <= position.y &&
+            position.x <= this.width &&
+            position.y <= this.height;
+  }
+
 };

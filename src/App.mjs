@@ -31,7 +31,12 @@ export default class Application {
   }
 
   handleError(err) {
-    console.error(err);
+    const stderr = this.process.stderr;
+    if(stderr) {
+      stderr.write(err.toString())
+    } else {
+      console.error(err);
+    }
     this.terminate(1);
   }
 
@@ -54,8 +59,6 @@ export default class Application {
             output.write(`Report: ${result.join(' ')}\n`);
           }
         });
-        // Each line in the readline input will be successively available here as
-        // `line`.
       }
       this.terminate(0);
     } catch(err) {

@@ -1,6 +1,6 @@
 import App from './App.mjs';
 import Channel from '../Channel.mjs';
-import { strictEqual } from 'node:assert'
+import { throws, strictEqual } from 'node:assert'
 
 
 describe('robot/App', function() {
@@ -20,4 +20,13 @@ describe('robot/App', function() {
     channel.send('R', 'F', 'L', 'F', 'F', 'L', 'R' , 'F');
     strictEqual(channel.state.value.join(' '), '3 1 E')
   });
+
+  it('should throw an error if outside the room', function() {
+    const channel = new Channel(App);
+    channel.send(2, 2);
+    channel.send(0, 0, 'E');
+    throws(() => channel.send('F', 'F', 'F'));
+    strictEqual(channel.state.value, void(0));
+  });
+  
 });

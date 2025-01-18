@@ -12,7 +12,11 @@ class State {
   }
 
   execute(command) {
-    this.robot.execute(command);
+    const { room, robot } = this;
+    robot.execute(command);
+    if(!room.contains(robot.position)) {
+      throw new Error('Robot is no longer inside the room');
+    }
   }
 
   report() {

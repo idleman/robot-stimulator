@@ -1,11 +1,15 @@
 {
   "name": "devoteam",
+  "license": "MIT",
   "version": "0.0.1",
   "description": "Devoteam robot assignment",
+  "author": "Fredrik Olofsson <evoozer@gmail.com>",
   "main": "index.mjs",
   "scripts": {
-    "test": "mocha ./**/*.test.mjs"
+    "test": "mocha ./**/*.test.mjs",
+    "robot": "node ./bin/robot.mjs"
   },
-  "author": "Fredrik Olofsson <evoozer@gmail.com>",
-  "license": "MIT"
+  "devDependencies": {
+    "mocha": "^11.0.1"
+  }
 }

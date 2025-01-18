@@ -36,9 +36,8 @@ export default class Orientation {
     }
     const max = values.length;
     const distance = this.getAsInteger() + v;
-
-    return  (0 <= distance) ? this.setAsInteger(distance%max) :
-            this.setAsInteger(((v%max) + max)%max);
+    const next = (0 <= distance) ? distance%max : ((v%max) + max)%max;
+    return this.setAsInteger(next);
   }
 
   getAsInteger() {
